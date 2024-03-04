@@ -1,0 +1,23 @@
+name: lab-coverage
+
+on: [push]
+
+jobs:
+  test-coverage:
+    name: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+          
+      - name: Run tests
+        run: poetry run pytest
+
+      - name: Check Coverage
+        run: poetry run pytest --cov app/ --cov-branch --cov-report=term --cov-fail-under=85
